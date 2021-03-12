@@ -1,0 +1,45 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Events List</h1>
+
+    <form action="/events" method="post">
+      <label for="date">Date</label>
+      <input type="date" name="date" id="date">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name">
+      <label for="no_of_guests">Number of Guests</label>
+      <input type="number" name="no_of_guests" id="no_of_guests" min="0" max="999">
+      <label for="room">Room Location</label>
+      <input type="text" name="room" id="room">
+      <label for="description">Description</label>
+      <textarea name="description" id="description" rows="2" cols="30"></textarea>
+      <input type="submit" value="Add Task">
+    </form> 
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Number of Guests</th>
+            <th>Room Location</th>
+            <th>Has Paid?</th>
+        </tr>
+        {% for event in events %}
+        <tr>
+            <div class='id'>
+                <td>
+                    <a href="/events/{{event.event_id}}">{{event.event_id}}</a>
+                </td>
+            </div>
+            <td>{{event.date}}</td>
+            <td>{{event.name}}</td> 
+            <td>{{event.no_of_guests}}</td>
+            <td>{{event.room}}</td>
+            <td><input type="checkbox" name="has_paid" id="has_paid" ></td>
+        </tr>
+        {% endfor %}
+{% endblock %}
+
+
